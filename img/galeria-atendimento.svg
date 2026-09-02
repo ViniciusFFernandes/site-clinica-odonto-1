@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 460" width="520" height="460" role="img" aria-label="Atendimento">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d4650"/><stop offset="1" stop-color="#2f6571"/>
+    </linearGradient>
+    <radialGradient id="r" cx="0.75" cy="0.2" r="0.9">
+      <stop offset="0" stop-color="#c9a86a" stop-opacity="0.35"/><stop offset="1" stop-color="#c9a86a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.5" fill="#ffffff" opacity="0.06"/>
+    </pattern>
+  </defs>
+  <rect width="520" height="460" fill="url(#g)"/>
+  <rect width="520" height="460" fill="url(#dots)"/>
+  <rect width="520" height="460" fill="url(#r)"/>
+  <circle cx="426" cy="368" r="184" fill="#ffffff" opacity="0.05"/>
+  <g transform="translate(260 193)" fill="none" stroke="#c9a86a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <g transform="translate(-30 -30) scale(2.5)"><path d="M19 14c1.6-1.6 2.6-2.9 2.6-4.9A5.5 5.5 0 0 0 12 5.8 5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l6 5.8a1 1 0 0 0 1.4 0"/></g>
+  </g>
+  <text x="260" y="368" text-anchor="middle" font-family="Georgia, serif" font-size="32" fill="#ffffff" opacity="0.92" font-style="italic">Atendimento</text>
+</svg>

@@ -1,0 +1,165 @@
+@import "tailwindcss" source(none);
+@source "../index.php";
+@source "../config/clinica.php";
+@source "../js/app.js";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius: 1.25rem;
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-3xl: calc(var(--radius) + 22px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-petrol: var(--petrol);
+  --color-petroldark: var(--petroldark);
+  --color-deep: var(--deep);
+  --color-deep-foreground: var(--deep-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  /* Paleta: branco, azul petróleo, azul profundo, cinza claro, dourado discreto */
+  --background: oklch(0.992 0.003 220);          /* branco levemente frio */
+  --foreground: oklch(0.28 0.03 220);            /* azul-ardósia escuro */
+  --card: #ffffff;
+  --card-foreground: oklch(0.28 0.03 220);
+
+  --primary: #23414a;                            /* azul petróleo escuro (títulos) */
+  --primary-foreground: oklch(0.99 0.005 220);
+
+  --petrol: #2f6571;                             /* azul petróleo (referência clínica) */
+  --petroldark: #397880;
+  --deep: #16323a;                               /* azul profundo (fundos escuros) */
+  --deep-foreground: oklch(0.97 0.01 210);
+
+  --secondary: oklch(0.965 0.008 215);           /* cinza claro */
+  --secondary-foreground: #23414a;
+  --muted: oklch(0.965 0.008 215);
+  --muted-foreground: oklch(0.48 0.02 220);
+
+  --accent: #397880;
+  --accent-foreground: oklch(0.99 0.005 210);
+
+  --gold: #c9a86a;                               /* dourado discreto */
+
+  --whatsapp: #25d366;
+  --whatsapp-foreground: #ffffff;
+
+  --border: oklch(0.90 0.01 220);
+  --input: oklch(0.90 0.01 220);
+  --ring: #2f6571;
+
+  --gradient-hero: linear-gradient(150deg, #16323a 0%, #1d4650 50%, #2f6571 120%);
+  --gradient-gold: linear-gradient(120deg, #dcc188 0%, #c9a86a 55%, #b8955a 100%);
+  --gradient-petrol: linear-gradient(135deg, #16323a 0%, #2f6571 60%, #397880 100%);
+  --shadow-soft: 0 14px 40px -18px oklch(0.30 0.05 225 / 0.30);
+  --shadow-lift: 0 34px 80px -30px oklch(0.25 0.06 225 / 0.45);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  ::selection {
+    background-color: var(--gold);
+    color: #16323a;
+  }
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility surface-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+  &:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-6px);
+    border-color: color-mix(in oklab, var(--petrol) 55%, transparent);
+  }
+}
+
+@utility text-balance { text-wrap: balance; }
+
+@utility bg-gradient-gold { background-image: var(--gradient-gold); }
+@utility bg-gradient-hero { background-image: var(--gradient-hero); }
+@utility bg-gradient-petrol { background-image: var(--gradient-petrol); }
+
+/* ===== Marquee (faixa de especialidades) ===== */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee__track {
+  display: inline-block;
+  will-change: transform;
+  animation: marquee-scroll 34s linear infinite;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ===== Antes e Depois (slider comparativo) ===== */
+.ba-slider { touch-action: pan-y; }
+.ba-slider__handle { pointer-events: none; }
+.ba-slider__before img { pointer-events: none; }
+.ba-slider__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 44px;
+  height: 100%;
+}
+.ba-slider__range::-moz-range-thumb {
+  width: 44px;
+  height: 100%;
+  border: 0;
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee__track { animation: none; }
+  html { scroll-behavior: auto; }
+}
